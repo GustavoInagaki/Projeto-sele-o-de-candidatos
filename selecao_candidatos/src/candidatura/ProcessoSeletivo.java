@@ -1,10 +1,62 @@
 package candidatura;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ProcessoSeletivo {
     public static void main(String[] args) throws Exception {
-        selecaoCandidtatos();
+        String [] candidatos = {"Felipe", "Julia", "Marcelo", "Laryssa", "joão"};
+
+        for(String candidato : candidatos){
+            entrarEmContato(candidato);
+        }
+
+    }
+
+    static void entrarEmContato(String candidato){
+        int tentativasLigacao = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+
+        do{
+            atendeu = atender();
+            continuarTentando = !atendeu;
+
+            if(continuarTentando){
+                tentativasLigacao++;
+                
+            }else{
+                System.out.println("Ligação realizada com sucesso.");
+            }
+
+
+        }while(continuarTentando && tentativasLigacao<3);
+            if (atendeu) {
+                System.out.println("Conseguimos o contato com o canditado " + candidato + " na tentativa " + tentativasLigacao);
+            }else{
+                System.out.println("Não conseguimos o contato com o candidato " + candidato);
+            }
+        
+    }
+
+    //metodo auxiliar
+    static boolean atender(){
+        return new Random().nextInt(3)==1;
+    }
+
+
+    static void imprimirSelecionados(){
+        String [] candidatos = {"Felipe", "Julia", "Marcelo", "Laryssa", "joão"};
+
+        for(int indice = 0; indice < candidatos.length ; indice++){
+
+            System.out.println("O candidato "+ candidatos[indice] + " foi selecionado na posição: " + (indice + 1)+"º");
+        }
+
+        for(String selecionados: candidatos ){
+            System.out.println("O candidato selecionado foi: " + selecionados);
+        }
+
     }
 
     static void selecaoCandidtatos(){
